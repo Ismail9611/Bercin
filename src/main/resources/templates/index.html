@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Dir bercin site</title>
+    <link rel ="stylesheet" type="text/css" media="all"  th:href="@{/static/css/styles.css}">
+    <link rel="stylesheet" type="text/css" href="static/css/styles.css">
+
+</head>
+<body>
+<div id="main">
+    <div id="mainmenu">
+        <ul>
+            <li><a th:href="@{/}">Главная</a></li>
+            <li><a th:href="@{/articles}">Мои статьи</a></li>
+            <li><a th:href="@{/registration}">Регистрация</a></li>
+            <li><a th:href="@{/login}">Войти</a></li>
+        </ul>
+    </div>
+    <div class="content">
+
+    </div>
+</div>
+
+</body>
+</html>

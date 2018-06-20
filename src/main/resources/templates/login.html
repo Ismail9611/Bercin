@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login page</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/static/css/styles.css}">
+</head>
+<body>
+<div id="mainmenu">
+    <ul>
+        <li><a th:href="@{/}">Главная</a></li>
+        <li><a th:href="@{/articles}">Мои статьи</a></li>
+        <li><a th:href="@{/registration}">Регистрация</a></li>
+        <li><a th:href="@{/login}">Войти</a></li>
+    </ul>
+</div>
+<div>
+    <div sec:authorize="isAuthenticated()">
+        <div class="auth_lbl">
+            <p>Вы уже вошли в систему под именем: <span sec:authentication="name"></span></p>
+            <form method="post" th:action="@{/logout}">
+                <input type="submit" value="Выйти"/>
+            </form>
+        </div>
+    </div>
+    <div sec:authorize="isAnonymous()">
+        <div class="reg">
+            <div>
+                <p class="lbl">Login page:</p>
+            </div>
+            <form th:action="@{/login}" method="post">
+                <p>
+                    <label for="login" class="lbl">Username:</label>
+                    <input type="text" name="username" id="login" placeholder="Username">
+                </p>
+                <p>
+                    <label for="password" class="lbl">Password:</label>
+                    <input type="password" name="password" class="password" id="password" placeholder="Password">
+                </p>
+                <p class="registration-submit">
+                    <button type="submit" id="reg_button">Log in</button>
+                </p>
+                <p th:text="${message}" id="message"></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

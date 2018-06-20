@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/styles.css}">
+</head>
+<body>
+<div id="mainmenu">
+    <ul>
+        <li><a th:href="@{/}">Главная</a></li>
+        <li><a th:href="@{/articles}">Мои статьи</a></li>
+        <li><a th:href="@{/registration}">Регистрация</a></li>
+        <li><a th:href="@{/login}">Войти</a></li>
+    </ul>
+</div>
+<div class="reg">
+    <div>
+        <p class="lbl">Registration page:</p>
+    </div>
+    <form th:action="@{/registration}" method="post">
+        <p>
+            <label for="login" class="lbl">Username:</label>
+            <input type="text" name="username" id="login" placeholder="Username">
+        </p>
+        <p>
+            <label for="password" class="lbl">Password:</label>
+            <input type="password" name="password" class="password" id="password" placeholder="Password">
+        </p>
+        <p>
+            <label for="password_rep" class="lbl" id="pass_rep_id">Repeat:</label>
+            <input type="password" name="password_rep" class="password" id="password_rep" placeholder="Repeat password">
+        </p>
+        <p class="registration-submit">
+            <button type="submit" id="reg_button">Sign in</button>
+        </p>
+        <p th:text="${message}" id="message"></p>
+    </form>
+</div>
+
+</body>
+</html>
