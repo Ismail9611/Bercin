@@ -1,7 +1,6 @@
 package com.direb.config;
 
 
-import com.direb.domain.User;
 import com.direb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/registration", "/login", "/about" , "/static/**").permitAll()
+                    .antMatchers("/", "/registration", "/login", "/about" , "/more_article", "/static/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .formLogin()

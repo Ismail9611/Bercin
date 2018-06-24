@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 
@@ -23,20 +20,20 @@ public class ArticleController {
     private ArticleRepository articleRepository;
 
     @Autowired
-    public void setArticleRepository(ArticleRepository articleRepository){
+    public void setArticleRepository(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
 
     @GetMapping
-    public String root(Model model){
-        showAllArticles(model);
+    public String root(@AuthenticationPrincipal User user, Model model) {
+        showAllArticlesByAuthor(user, model);
         return "articles";
     }
 
     @PostMapping("/add")
     public String addArticle(@AuthenticationPrincipal User user,
                              @RequestParam(name = "title") String title,
-                             @RequestParam(name = "body") String body){
+                             @RequestParam(name = "body") String body) {
         Article article = new Article(title, body, new Date(), user);
         articleRepository.save(article);
         return "redirect:/articles";
@@ -44,17 +41,25 @@ public class ArticleController {
 
 
     @GetMapping("/edit/{id}")
-    public String editArticle(){
+    public String editArticle(@PathVariable(name = "id") Article article, Model model) {
+        model.addAttribute("article", article);
         return "article_edit";
     }
 
-    private void showAllArticles(Model model){
-        Iterable<Article> allArticles = articleRepository.findAll();
-        model.addAttribute("allArticles", allArticles);
+    @PostMapping("/save_edit")
+    public String art_edit(@RequestParam(name = "articleId") Article article,
+                           @RequestParam(name = "title_edt") String title,
+                           @RequestParam(name = "body_edt") String body) {
+        article.setTitle(title);
+        article.setBody(body);
+        article.setDate(new Date());
+        articleRepository.save(article);
+        return "redirect:/articles";
     }
 
-
-
-
+    private void showAllArticlesByAuthor(User author, Model model) {
+        Iterable<Article> allArticles = articleRepository.findAllByAuthor(author);
+        model.addAttribute("allArticles", allArticles);
+    }
 
 }

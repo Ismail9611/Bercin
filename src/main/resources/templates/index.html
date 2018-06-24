@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Dir bercin site</title>
-    <link rel ="stylesheet" type="text/css" media="all"  th:href="@{/static/css/styles.css}">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/static/css/styles.css}">
     <link rel="stylesheet" type="text/css" href="static/css/styles.css">
-
 </head>
 <body>
 <div id="main">
@@ -19,7 +18,20 @@
         </ul>
     </div>
     <div class="content">
-
+        <div id="all_art_lbl">
+            <p>Просмотр всех статьей</p>
+        </div>
+        <div th:if="${not #lists.isEmpty(allArticles)}">
+            <th:block th:each="article : ${allArticles}">
+                <div class="articles_index">
+                    <p id="art_lbl_author_index" th:text="'Автор: ' + ${article.author.username}"></p>
+                    <p class="art_lbl_index" th:text="'Тема: ' + ${article.title}"></p>
+                    <p class="art_lbl_index" th:text="'Статья: ' + ${article.body}"></p>
+                    <p class="art_lbl_index" th:text="'Опубликовано: ' + ${article.date}"></p>
+                    <a th:href="@{/more_article}" id="show_more_index">Подробнее..</a>
+                </div>
+            </th:block>
+        </div>
     </div>
 </div>
 

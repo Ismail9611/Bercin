@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/static/css/styles.css}">
     <title>Edit article</title>
 </head>
 <body>
-
+<div id="mainmenu">
+    <ul>
+        <li><a th:href="@{/}">Главная</a></li>
+        <li><a th:href="@{/articles}">Мои статьи</a></li>
+        <li><a th:href="@{/registration}">Регистрация</a></li>
+        <li><a th:href="@{/login}">Войти</a></li>
+    </ul>
+</div>
+<div id="edit_art_h3">
+    <h3>Изменить статью</h3>
+</div>
+<div class="edit_article">
+    <form method="post" th:action="@{/articles/save_edit}">
+        <p>
+            <label for="edt_title_input" id="edt_title_lbl">Заголовок</label>
+            <input type="text" name="title_edt" id="edt_title_input" th:text="${article.title}">
+        </p>
+        <p>
+            <label for="edt_body_area" id="edt_body_lbl">Статья</label>
+            <textarea name="body_edt" id="edt_body_area" th:text="${article.body}"></textarea>
+        </p>
+        <input type="hidden" th:value="${article.id}" name="articleId">
+        <p>
+            <button type="submit" id="edt_save_btn">Сохранить</button>
+        </p>
+    </form>
+</div>
 </body>
 </html>
