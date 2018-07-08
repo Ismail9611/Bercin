@@ -6,14 +6,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/styles.css}">
 </head>
 <body>
-<div id="mainmenu">
-    <ul>
-        <li><a th:href="@{/}">Главная</a></li>
-        <li><a th:href="@{/articles}">Мои статьи</a></li>
-        <li><a th:href="@{/registration}">Регистрация</a></li>
-        <li><a th:href="@{/login}">Войти</a></li>
-    </ul>
-</div>
+<div th:include="@{parts/menu.html}"></div>
 <div class="reg">
     <div>
         <p class="lbl">Registration page:</p>
@@ -24,12 +17,16 @@
             <input type="text" name="username" id="login" placeholder="Username">
         </p>
         <p>
+            <label for="email" class="lbl">Email:</label>
+            <input type="email" name="email" id="email" placeholder="Email">
+        </p>
+        <p>
             <label for="password" class="lbl">Password:</label>
             <input type="password" name="password" class="password" id="password" placeholder="Password">
         </p>
         <p>
             <label for="password_rep" class="lbl" id="pass_rep_id">Repeat:</label>
-            <input type="password" name="password_rep" class="password" id="password_rep" placeholder="Repeat password">
+            <input type="password" name="password_rep" class="password" id="password_rep" placeholder="Confirm password">
         </p>
         <p class="registration-submit">
             <button type="submit" id="reg_button">Sign in</button>

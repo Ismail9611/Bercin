@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>More article</title>
+    <title th:text="${article.title}"></title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/static/css/styles.css}">
 </head>
 <body>
-
+    <div th:include="@{parts/menu.html}"></div>
+    <div>
+        <div class="articles_index">
+            <p id="art_lbl_author_index" th:text="'Автор: ' + ${article.author.username}"></p>
+            <p class="art_lbl_index" th:text="'Тема: ' + ${article.title}"></p>
+            <p class="art_lbl_index" th:text="'Статья: ' + ${article.body}"></p>
+            <p class="art_lbl_index" th:text="'Опубликовано: ' + ${article.date}"></p>
+        </div>
+    </div>
+    <div id="comments_art_lbl">
+        <p>Комментарии</p>
+    </div>
+    <div>
+        <div th:if="${not #lists.isEmpty(allComments)}">
+            <th:block th:each="comment : ${allComments}">
+                <div class="comments_index">
+                    <div class="comment_author">
+                        <p th:text="${comment.author.username}"></p>
+                    </div>
+                    <div class="comment_text">
+                        <p th:text="${comment.text}"></p>
+                    </div>
+                    <div class="comment_date">
+                        <p th:text="${comment.date}"></p>
+                    </div>
+                </div>
+            </th:block>
+        </div>
+    </div>
+    <div>
+        <div class="add_comment">
+            <p id="remain_comm_lbl">Оставьте ваш отзыв:</p>
+            <form th:action="@{/add_comment}" method="post">
+                <p>
+                    <textarea name="comment_add_text" id="comment_add_text"></textarea>
+                </p>
+                <input type="hidden" th:value="${article.id}" name="articleId">
+                <p>
+                    <button type="submit" id="comment_add_add">Оставить отзыв</button>
+                </p>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

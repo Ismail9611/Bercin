@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Controller
 @RequestMapping("/articles")
@@ -34,7 +34,7 @@ public class ArticleController {
     public String addArticle(@AuthenticationPrincipal User user,
                              @RequestParam(name = "title") String title,
                              @RequestParam(name = "body") String body) {
-        Article article = new Article(title, body, new Date(), user);
+        Article article = new Article(title, body, new Date(System.currentTimeMillis()), user);
         articleRepository.save(article);
         return "redirect:/articles";
     }
@@ -42,6 +42,7 @@ public class ArticleController {
 
     @GetMapping("/edit/{id}")
     public String editArticle(@PathVariable(name = "id") Article article, Model model) {
+
         model.addAttribute("article", article);
         return "article_edit";
     }
@@ -52,7 +53,7 @@ public class ArticleController {
                            @RequestParam(name = "body_edt") String body) {
         article.setTitle(title);
         article.setBody(body);
-        article.setDate(new Date());
+        article.setDate(new Date(System.currentTimeMillis()));
         articleRepository.save(article);
         return "redirect:/articles";
     }

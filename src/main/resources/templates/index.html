@@ -9,18 +9,12 @@
 </head>
 <body>
 <div id="main">
-    <div id="mainmenu">
-        <ul>
-            <li><a th:href="@{/}">Главная</a></li>
-            <li><a th:href="@{/articles}">Мои статьи</a></li>
-            <li><a th:href="@{/registration}">Регистрация</a></li>
-            <li><a th:href="@{/login}">Войти</a></li>
-        </ul>
-    </div>
+    <div th:include="@{parts/menu.html}"></div>
     <div class="content">
         <div id="all_art_lbl">
             <p>Просмотр всех статьей</p>
         </div>
+        <p th:text="${message}"></p>
         <div th:if="${not #lists.isEmpty(allArticles)}">
             <th:block th:each="article : ${allArticles}">
                 <div class="articles_index">
@@ -28,7 +22,7 @@
                     <p class="art_lbl_index" th:text="'Тема: ' + ${article.title}"></p>
                     <p class="art_lbl_index" th:text="'Статья: ' + ${article.body}"></p>
                     <p class="art_lbl_index" th:text="'Опубликовано: ' + ${article.date}"></p>
-                    <a th:href="@{/more_article}" id="show_more_index">Подробнее..</a>
+                    <a th:href="@{/article_more/{id} (id=${article.id})}" id="show_more_index">Подробнее..</a>
                 </div>
             </th:block>
         </div>

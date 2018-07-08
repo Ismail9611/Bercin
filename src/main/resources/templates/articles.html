@@ -6,45 +6,34 @@
     <title>Мои статьи</title>
 </head>
 <body>
-<div id="mainmenu">
-    <ul>
-        <li><a th:href="@{/}">Главная</a></li>
-        <li><a th:href="@{/articles}">Мои статьи</a></li>
-        <li><a th:href="@{/registration}">Регистрация</a></li>
-        <li><a th:href="@{/login}">Войти</a></li>
-    </ul>
-</div>
-<div>
-    <h3>Мои статьи</h3>
-</div>
+<div th:include="@{parts/menu.html}"></div>
 <div class="add_article">
     <form method="post" th:action="@{/articles/add}">
         <p>
-            <label for="title" id="title_lbl">Заголовок</label>
-            <input type="text" name="title" id="title" placeholder="Заголовок">
+        <p class="lbl_theme_articles">Тема:</p>
+        <input type="text" name="title" id="title_articles">
         </p>
         <p>
-            <label for="body" id="body_lbl">Статья</label>
-            <textarea name="body" id="body"></textarea>
+        <p class="lbl_theme_articles">Статья:</p>
+        <textarea name="body" id="body_articles"></textarea>
         </p>
         <p>
-            <button type="submit" id="add_art_butt">Опубликовать</button>
+            <button type="submit" id="add_art_butt_articles">Опубликовать</button>
         </p>
     </form>
 </div>
-
-<div class="articles">
-    <div id="lbl_earlier">
-        <h3>Ранние статьи</h3>
-    </div>
-    <div class="earlier_art" th:if="${not #lists.isEmpty(allArticles)}">
-        <th:block th:each="article : ${allArticles}">
-            <p id="art_title" th:text="${article.title}"></p>
-            <p id="art_body" th:text="${article.body}"></p>
-            <p id="art_date" th:text="${article.date}"></p>
-            <p id="art_edit"><a th:href="@{/articles/edit/{id} (id=${article.id})}">Редактировать</a></p>
-        </th:block>
-    </div>
+<div id="lbl_earlier">
+    <h3>Ранние статьи</h3>
+</div>
+<div th:if="${not #lists.isEmpty(allArticles)}">
+    <th:block th:each="article : ${allArticles}">
+        <div class="articles">
+            <p id="art_title" th:text="'Тема: ' + ${article.title}"></p>
+            <p id="art_body" th:text="'Статья: ' + ${article.body}"></p>
+            <p id="art_date" th:text="'Опубликовано: ' + ${article.date}"></p>
+            <a id="art_edit" th:href="@{/articles/edit/{id} (id=${article.id})}">Редактировать..</a>
+        </div>
+    </th:block>
 </div>
 </body>
 </html>

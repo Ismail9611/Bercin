@@ -6,14 +6,7 @@
     <title>Edit article</title>
 </head>
 <body>
-<div id="mainmenu">
-    <ul>
-        <li><a th:href="@{/}">Главная</a></li>
-        <li><a th:href="@{/articles}">Мои статьи</a></li>
-        <li><a th:href="@{/registration}">Регистрация</a></li>
-        <li><a th:href="@{/login}">Войти</a></li>
-    </ul>
-</div>
+<div th:include="@{parts/menu.html}"></div>
 <div id="edit_art_h3">
     <h3>Изменить статью</h3>
 </div>

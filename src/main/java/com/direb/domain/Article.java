@@ -2,7 +2,7 @@ package com.direb.domain;
 
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "articles")
@@ -25,6 +25,7 @@ public class Article {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
+
 
     public Article(){
     }
@@ -75,4 +76,5 @@ public class Article {
     public void setAuthor(User author) {
         this.author = author;
     }
+
 }

@@ -7,20 +7,13 @@
     <link rel="stylesheet" type="text/css" media="all" th:href="@{/static/css/styles.css}">
 </head>
 <body>
-<div id="mainmenu">
-    <ul>
-        <li><a th:href="@{/}">Главная</a></li>
-        <li><a th:href="@{/articles}">Мои статьи</a></li>
-        <li><a th:href="@{/registration}">Регистрация</a></li>
-        <li><a th:href="@{/login}">Войти</a></li>
-    </ul>
-</div>
+<div th:include="@{parts/menu.html}"></div>
 <div>
     <div sec:authorize="isAuthenticated()">
         <div class="auth_lbl">
             <p>Вы уже вошли в систему под именем: <span sec:authentication="name"></span></p>
             <form method="post" th:action="@{/logout}">
-                <input type="submit" value="Выйти"/>
+                <input type="submit" value="Выйти" id="logout_button"/>
             </form>
         </div>
     </div>
