@@ -1,3 +1,3 @@
 # Bercin
-Simple blog
+Simple blog.
 Used technologies: Spring framework, Hibernate, Thymeleaf.
